@@ -17,6 +17,10 @@ def connectMySQL():
     except:
         print("Error to connect MYSQL")
     data = cursor.fetchone()
-    # print("MYSQL VERSION is "+data[0])
+    print("MYSQL VERSION is "+data[0])
     cursor.close()
     return db
+
+
+if __name__ == '__main__':
+    connectMySQL()
