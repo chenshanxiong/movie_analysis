@@ -181,10 +181,8 @@ def classifyDate():
         dateRange("2017-01-15", "2017-02-20")
     winterVacationAvg = getInfoFromMySQL(WinterVacation)
     data.append(winterVacationAvg)
-
     # print(data)
-
-    return (data)
+    return data
 
 
 def drawHistogram():
@@ -211,7 +209,6 @@ def saveResultToTxt(datas):
             + "\n五一 " + str(datas[4]) + "\n端午 " + str(datas[5]) + "\n中秋 " + str(datas[6]) + "\n十一 " + str(datas[7])
             + "\n情人节 " + str(datas[8]) + "\n暑假 " + str(datas[9]) + "\n寒假 " + str(datas[10]) + "\n7年平均值 " + str(
                 datas[11]))
-
     file_to_write = open(dataFileName, 'w+', encoding='utf-8')
     if file_to_write.write(data + '\n'):
         print('success save information:')
@@ -245,16 +242,17 @@ def quantDate():
         print(quanti_value)
         result.append(str(quanti_value))
     file_to_reader.close()
-    return (result)
+    return result
 
 
 if __name__ == '__main__':
-    # avgDailyBoxOffice = getInfoFromMySQL(dateRange('2011-01-01','2018-03-06'))
+    # avgDailyBoxOffice = getInfoFromMySQL(dateRange('2011-01-01', '2018-03-06'))
     # print(avgDailyBoxOffice)
     # 上面的函数计算7年来每日平均票房为9559万元
-    datas = classifyDate()
-    avgDailyBoxOffice = 9553
-    datas.append(avgDailyBoxOffice)
-    saveResultToTxt(datas)
-    drawHistogram()
+    # datas = classifyDate()
+    # avgDailyBoxOffice = 9553
+    # datas.append(avgDailyBoxOffice)
+    # saveResultToTxt(datas)
     # drawHistogram()
+    result = quantDate()
+    print(result)
