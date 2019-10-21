@@ -7,7 +7,6 @@ import re
 def getActorName():
     actors = set()
     file_reader = open('../data/movie_china_details.txt', 'r', encoding='utf-8')
-    actorNames = set()
     for line in file_reader.readlines():
         item = line.split(',')
         names = item[11].split('/')
@@ -24,10 +23,10 @@ def getActorName():
                     break
                 else:
                     name_type = '算是中国人名吧'
-            if (name_type == '外国人名'):
+            if name_type == '外国人名':
                 continue
             actors.add(new_name)
-    return (actors)
+    return actors
 
 
 if __name__ == '__main__':
@@ -37,4 +36,3 @@ if __name__ == '__main__':
     for actor in actors:
         count = count + 1
     print("演员名字数目：", count)
-# 我的妈呀，抓出来1万个像是中国演员的名字，让我冷静一下

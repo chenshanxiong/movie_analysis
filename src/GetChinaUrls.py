@@ -29,6 +29,7 @@ def get_url(code, page):
     html = requests.get('http://www.cbooo.cn/Mdata/getMdata_movie?area=' + str(
         code) + '&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex=' + str(page), headers=headers).text
     data = eval(html)['pData']
+    # print(data)
     for item in data:
         text = 'http://www.cbooo.cn/m/' + item['ID']
         results.append(text)
@@ -57,4 +58,6 @@ def main():
 
 
 if __name__ == '__main__':
+    # result = get_url(50, 1)
+    # print(result)
     main()

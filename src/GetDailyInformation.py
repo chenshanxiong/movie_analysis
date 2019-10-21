@@ -110,17 +110,14 @@ def getData(date):
                 release_time = '--'
         # 电影名称获取失败，直接跳过
         # to change the data as same formate
-        if (
-                movie_name == '--' or movie_daily_BoxOffice == '--' or movie_daily_BoxOffice == '' or movie_daily_BoxOffice == '--'):
+        if movie_name == '--' or movie_daily_BoxOffice == '--' or movie_daily_BoxOffice == '' or movie_daily_BoxOffice == '--':
             continue
-        if (attendance == ''):
+        if attendance == '':
             attendance = '--'
-        if (release_time == '' or release_time == '-'):
+        if release_time == '' or release_time == '-':
             release_time = '--'
-
         text = date + ',' + movie_name + ',' + movie_daily_BoxOffice + ',' + movie_total_BoxOffice + ',' + percentage_screenings + ',' + attendance + ',' + release_time
         print(text)
-
         try:
             if file_to_write.write(text + '\n'):
                 print('success get information:' + date)

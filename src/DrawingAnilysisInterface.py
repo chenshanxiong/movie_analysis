@@ -40,6 +40,7 @@ def drawByDates(beginDate, endDate):
     db.close()
     # 从此开始做图
     print(dates)
+    print("============")
     print(boxOffices)
     plt.xlabel("Date(day)")  # X轴标签
     plt.ylabel("BoxOffices(WanYuan)")  # Y轴标签
@@ -63,7 +64,7 @@ def getInforByDate(date, db):
     for row in rows:
         dailyBoxOfficeSum = dailyBoxOfficeSum + float(row[0])
     cursor.close()
-    return (dailyBoxOfficeSum)
+    return dailyBoxOfficeSum
 
 
 if __name__ == '__main__':
