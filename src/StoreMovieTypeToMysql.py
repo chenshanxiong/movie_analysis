@@ -41,7 +41,7 @@ def storeInfor():
         boxOffice = item[4].replace("万", "")
         movieType = item[6].split("/")
         # 数据的简单处理，将票房缺失值剔除
-        if (boxOffice == "--"):
+        if boxOffice == "--":
             continue
         firstType = movieType[0]
         try:
@@ -56,7 +56,6 @@ def storeInfor():
         print(data)
 
         # 插入数据库中
-
         cursor = db.cursor()
         sql = "INSERT INTO MovieType (movieName,boxOffice,firstType,secondType,thirdType) \
 		VALUES ('%s','%s','%s','%s','%s')" % tuple(data)
@@ -67,7 +66,6 @@ def storeInfor():
         except:
             db.rollback()
             print("fail to insert data", data)
-
         cursor.close()
     db.close()
 

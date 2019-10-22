@@ -7,7 +7,7 @@ print(sys.getdefaultencoding())
 from ConnectToMySQL import connectMySQL
 
 db = connectMySQL()
-# 后面的编码格式极其重要，耽误了两个小时，下次一定操作数据的时候一定要注意设置编码的一致
+# 后面的编码格式极其重要，耽误了两个小时，下次操作数据的时候一定要注意设置编码的一致
 cursor = db.cursor()
 
 

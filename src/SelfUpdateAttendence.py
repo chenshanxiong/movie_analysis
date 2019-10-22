@@ -63,7 +63,7 @@ def getInfor():
         try:
             cursor.execute(sql)
             db.commit()
-            print("commit sucess!")
+            print("commit success!")
         except:
             db.rollback()
             print("commit error!")
