@@ -14,9 +14,8 @@ def getTypes():
         boxOffice = item[4].replace("万", "")
         movieType = item[6].split("/")
         # 数据的简单处理，将票房缺失值剔除
-        if (boxOffice == "--" and firstType == ''):
+        if boxOffice == "--" and firstType == '':
             continue
-
         try:
             firstType = movieType[0]
         except:
@@ -29,11 +28,9 @@ def getTypes():
             thirdType = movieType[2]
         except:
             thirdType = "--"
-
-        if (secondType == ''):
+        if secondType == '':
             secondType = "--"
-
-        if (thirdType == ''):
+        if thirdType == '':
             thirdType = "--"
         types.add(firstType)
         types.add(secondType)
@@ -42,12 +39,10 @@ def getTypes():
     for type in types:
         dictionary[type] = {"总票房": 0, "计数": 0}
     # print(dictionary)
-
     file_reader.close()
     return dictionary
 
 
-#
 # 不同类型量化方式
 def quanType():
     file_reader = open('../data/movie_details.txt', 'r', encoding='utf-8')
@@ -58,9 +53,8 @@ def quanType():
         boxOffice = item[4].replace("万", "")
         movieType = item[6].split("/")
         # 数据的简单处理，将票房缺失值剔除
-        if (boxOffice == "--" and firstType == ''):
+        if boxOffice == "--" and firstType == '':
             continue
-
         try:
             firstType = movieType[0]
         except:
@@ -73,11 +67,9 @@ def quanType():
             thirdType = movieType[2]
         except:
             thirdType = "--"
-
-        if (secondType == ''):
+        if secondType == '':
             secondType = "--"
-
-        if (thirdType == ''):
+        if thirdType == '':
             thirdType = "--"
 
         ###########################################
@@ -90,27 +82,22 @@ def quanType():
         #
         ###########################################
 
-        if (boxOffice != '--' and firstType != '--' and secondType != '--' and thirdType == '--'):
+        if boxOffice != '--' and firstType != '--' and secondType != '--' and thirdType == '--':
             # 情况1
             typeDic[firstType]['总票房'] += float(boxOffice) * 0.7
             typeDic[firstType]['计数'] = typeDic[firstType]['计数'] + 1
-
             typeDic[secondType]['总票房'] += float(boxOffice) * 0.3
             typeDic[secondType]['计数'] = typeDic[secondType]['计数'] + 1
-
-        elif (boxOffice != '--' and firstType != '--' and secondType == '--' and thirdType == '--'):
+        elif boxOffice != '--' and firstType != '--' and secondType == '--' and thirdType == '--':
             # 情况2
             typeDic[firstType]['总票房'] += float(boxOffice)
             typeDic[firstType]['计数'] = typeDic[firstType]['计数'] + 1
-
-        elif (boxOffice != '--' and firstType != '--' and secondType != '--' and thirdType != '--'):
+        elif boxOffice != '--' and firstType != '--' and secondType != '--' and thirdType != '--':
             # 情况3
             typeDic[firstType]['总票房'] += float(boxOffice) * 0.7
             typeDic[firstType]['计数'] = typeDic[firstType]['计数'] + 1
-
             typeDic[secondType]['总票房'] += float(boxOffice) * 0.2
             typeDic[secondType]['计数'] = typeDic[secondType]['计数'] + 1
-
             typeDic[thirdType]['总票房'] += float(boxOffice) * 0.1
             typeDic[thirdType]['计数'] = typeDic[thirdType]['计数'] + 1
 
@@ -119,17 +106,17 @@ def quanType():
     avgDic = {}
     for movieType in typeDic.keys():
         # 除零错误
-        if (typeDic[movieType]['计数'] == 0):
+        if typeDic[movieType]['计数'] == 0:
             continue
         avgDic[movieType] = typeDic[movieType]['总票房'] / typeDic[movieType]['计数']
 
     # 排序输出
 
     avgDic = sorted(avgDic.items(), key=lambda x: x[1], reverse=True)
-
-    print(avgDic)
-    return avgDic
     file_reader.close()
+    # print(avgDic)
+    return avgDic
+
 
 
 def saveToTxt(List):

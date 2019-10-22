@@ -13,7 +13,7 @@ mpl.rcParams['font.sans-serif'] = ['SimHei']
 # 这是个日期生成函数，参数是日期的范围，返回日期参数
 def connectMySQL():
     db = pymysql.connect("47.100.51.19", "root", "aini1314@xiaoqing", "movie", charset='utf8')
-    # 后面的编码格式极其重要，耽误了两个小时，下次一定操作数据的时候一定要注意设置编码的一致
+    # 后面的编码格式极其重要，耽误了两个小时，下次操作数据的时候一定要注意设置编码的一致
     cursor = db.cursor()
     sql = "SELECT VERSION()"
     try:
@@ -56,7 +56,6 @@ def getInfoFromMySQL():
 
     df.to_csv('../data/boxOfficeProptation.csv')
     print(df)
-
     cursor.close()
     db.close()
 

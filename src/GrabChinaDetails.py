@@ -10,7 +10,7 @@ headers = {
     "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0"}
 
 '''
-函数:infor()
+函数: getDetials()
 功能：根据电影详细页面的网址（从一个已有的urls.txt文件中读入每一个详细页面的网址），收集电影的详细信息，并且以列表形式返回详细信息
 参数：url 电影详细页面的网址
 返回值：text 详细数据的列表
@@ -28,7 +28,6 @@ def getDetials(url):
         # 电影名称
     except:
         moviesName = '--'
-
     try:
         movieTickes = re.findall('累计票房<br/>(.*?)<', str(contentString))[0]
         # 电影票房
@@ -79,7 +78,6 @@ def getDetials(url):
         movieIssueingCompany = '--'
 
     text = moviesName + ',' + movieArea + ',' + movieTime + ',' + movieLiveTickes + ',' + movieTickes + ',' + movieStaring + ',' + movieType + ',' + movieTechnology + ',' + movieDate + ',' + movieIssueingCompany
-
     dd = soup.find('div', id='content').find('div', id='tabcont1').find('dl', attrs={'class': 'dltext'}).find_all('dd')
 
     # 获取导演名
@@ -114,7 +112,7 @@ def getDetials(url):
             infor_issue_conmpany += d.find('a').get_text().replace('\r', '').replace('\n', '').replace(' ', '').replace(
                 '，', '').replace(',', '') + '/'
         text = text + ',' + infor_issue_conmpany
-    return (text)
+    return text
 
 
 # 测试使用，吐槽python无严格数据类型
@@ -125,7 +123,7 @@ def getDetials_test(url):
 
 '''
 函数名：storeInfor()
-功能：将收集到每一个电影页面的详细信息保存到 movie_details.txt 文件中
+功能：将收集到每一个电影页面的详细信息保存到 movie_china_details.txt 文件中
 '''
 
 

@@ -1,7 +1,7 @@
-#coding:utf-8
+# coding:utf-8
 
 import requests
-#import xlwt3
+# import xlwt3
 from bs4 import BeautifulSoup
 import re
 
@@ -14,47 +14,49 @@ headers = {
 
 
 def get_code():
-    #单独执行，储存上映地区名称和选择编号code
-    f=open('../data/code.txt','w',encoding='utf-8')
-    html=requests.get('http://www.cbooo.cn/movies').text
-    table=BeautifulSoup(html,'lxml').find('div',attrs={'class':'select01'}).find('select',id='selArea').find_all('option')
+    # 单独执行，储存上映地区名称和选择编号code
+    f = open('../data/code.txt', 'w', encoding='utf-8')
+    html = requests.get('http://www.cbooo.cn/movies').text
+    table = BeautifulSoup(html, 'lxml').find('div', attrs={'class': 'select01'}).find('select', id='selArea').find_all(
+        'option')
     for item in table:
-        text=item.get_text()+','+item.get('value')
+        text = item.get_text() + ',' + item.get('value')
         print(text)
-        f.write(text+'\n')
+        f.write(text + '\n')
     f.close()
 
-def get_url(code,page):
-    results=[]
-    html=requests.get('http://www.cbooo.cn/Mdata/getMdata_movie?area='+str(code)+'&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex='+str(page),headers=headers).text
-    data=eval(html)['pData']
+
+def get_url(code, page):
+    results = []
+    html = requests.get('http://www.cbooo.cn/Mdata/getMdata_movie?area=' + str(
+        code) + '&type=0&year=0&initial=%E5%85%A8%E9%83%A8&pIndex=' + str(page), headers=headers).text
+    data = eval(html)['pData']
     for item in data:
-        text='http://www.cbooo.cn/m/'+item['ID']
+        text = 'http://www.cbooo.cn/m/' + item['ID']
         results.append(text)
     return results
 
 
 def main():
-    f=open('../data/urls.txt','a',encoding='utf-8')
-
-    for line in open('../data/code.txt','r',errors='ignore').readlines():
-        code=line.split(',')[-1]
-        page=1
-        pre=[]
+    f = open('../data/urls.txt', 'a', encoding='utf-8')
+    for line in open('../data/code.txt', 'r', errors='ignore').readlines():
+        code = line.split(',')[-1]
+        page = 1
+        pre = []
         while True:
             try:
-                results=get_url(code, page)
+                results = get_url(code, page)
             except:
                 break
-            if pre==results:
+            if pre == results:
                 break
-            pre=results
-            page+=1
+            pre = results
+            page += 1
             for item in results:
-                f.write(item+'\n')
-            print(code,'--',page)  
+                f.write(item + '\n')
+            print(code, '--', page)
     f.close()
 
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     main()
